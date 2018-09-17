@@ -21,7 +21,7 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?',
             (user_id,)
         ).fetchone()
-        
+
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -78,3 +78,9 @@ def login():
         flash(error)
 
     return render_template('auth/login.html')
+
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
